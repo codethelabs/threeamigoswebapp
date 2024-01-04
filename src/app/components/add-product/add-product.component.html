@@ -1,0 +1,29 @@
+<!-- add-product.component.html -->
+
+<div class="add-product-page">
+    <h1> Add Product</h1>
+    <form [formGroup]="addProductForm" class="add-product-form">
+      <mat-form-field appearance="outline">
+        <mat-label>Product Name</mat-label>
+        <input matInput placeholder="Enter product name" formControlName="productName">
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea matInput placeholder="Enter product description" formControlName="description"></textarea>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Price</mat-label>
+        <input matInput placeholder="Enter product price" type="number" formControlName="price">
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Stock Quantity</mat-label>
+        <input matInput placeholder="Enter stock quantity" type="number" formControlName="stockQuantity">
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" type="submit">Add Product</button>
+    </form>
+  </div>
+  

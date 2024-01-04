@@ -1,0 +1,19 @@
+<!-- login.component.html -->
+<div class="loginpage">
+    <h1 color="primary"><mat-icon color="primary">lock</mat-icon>
+    LOGIN PORTAL</h1>
+    <form [formGroup]="loginForm" class="loginform">
+        <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Enter your email" type="email" formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Enter your password" type="password" formControlName="password">
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">Login</button>
+    </form>
+</div>
+  
