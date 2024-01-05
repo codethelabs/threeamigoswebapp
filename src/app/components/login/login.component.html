@@ -2,7 +2,8 @@
 <div class="loginpage">
     <h1 color="primary"><mat-icon color="primary">lock</mat-icon>
     LOGIN PORTAL</h1>
-    <form [formGroup]="loginForm" class="loginform">
+    <div *ngIf="alert" [class]="alert"><mat-icon>{{alert == "success"? "check_circle":"close_circle"}}</mat-icon> {{feedback}}</div>
+    <form (ngSubmit)="loginUser()" [formGroup]="loginForm" class="loginform">
         <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
         <input matInput placeholder="Enter your email" type="email" formControlName="email">

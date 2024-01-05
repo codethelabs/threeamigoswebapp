@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/288bb67d-6f7f-452e-ae13-caa8fc92ede9/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/3amigoscorp",
+    "appService.deploySubpath": "dist"
+}

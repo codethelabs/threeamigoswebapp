@@ -8,13 +8,34 @@
 }
 
 .regform{
+    margin-bottom: 50px;
     display: flex;
     flex-direction: column;
     width: 500px;
-    height: 600px;
+    height: auto;
 
 }
 
 .entityselection{
     width: 300;
+}
+
+.success{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(44, 189, 44);
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    margin: 10px;
+}
+
+.error{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(228, 44, 20);
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    margin: 10px;
 }

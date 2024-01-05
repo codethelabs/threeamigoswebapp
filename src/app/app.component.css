@@ -6,3 +6,8 @@ mat-toolbar {
   .right-buttons {
     margin-left: auto;
   }
+
+.body{
+  height: auto;
+  width: auto;
+}

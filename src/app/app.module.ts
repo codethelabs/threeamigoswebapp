@@ -16,6 +16,9 @@ import {MatSelectModule} from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { AddProductComponent } from './components/add-product/add-product.component';
+import { HttpClientModule } from '@angular/common/http';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +26,8 @@ import { AddProductComponent } from './components/add-product/add-product.compon
     MarketComponent,
     RegisterComponent,
     LoginComponent,
-    AddProductComponent
+    AddProductComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,8 @@ import { AddProductComponent } from './components/add-product/add-product.compon
     MatFormFieldModule,
     MatSelectModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
