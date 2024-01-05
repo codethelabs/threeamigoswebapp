@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MasterService } from 'src/app/services/master.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,7 @@ import { MasterService } from 'src/app/services/master.service';
 export class RegisterComponent {
 
   // constructor
-  constructor(private ms: MasterService){}
+  constructor(private ms: MasterService, private router: Router){}
   // properties
   selectedEntity: string = 'user';
   feedback!: string;
@@ -42,6 +43,10 @@ export class RegisterComponent {
 
     return null;
   }
+  // naviage to login
+  loginPage(){
+    this.router.navigate(['/login'])
+  }
 
   // register the user
   registerUser() {
@@ -60,8 +65,7 @@ export class RegisterComponent {
         }
         this.ms.registerUser(data).subscribe((response:any)=>{
           if(response.success){
-            this.alert = "success"
-            this.feedback = response.message
+            this.router.navigate(['/login'])
           }else{
             this.alert = "error"
             this.feedback = response.message

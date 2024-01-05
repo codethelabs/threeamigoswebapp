@@ -20,6 +20,10 @@ export class LoginComponent {
     password: new FormControl('', Validators.required)    
   })
 
+  registrationPage(){
+    this.router.navigate(['/register'])
+  }
+
   loginUser(){
     if(this.loginForm.valid){
       let data = {

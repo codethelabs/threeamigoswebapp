@@ -1,23 +1,38 @@
 <mat-toolbar color="primary">
-    <span>THREE AMIGOS CORP</span>
+    <span>THREE AMIGOS CORP <small style="color: rgb(38, 212, 38);">{{userType}}</small></span>
   
     <!-- Right-aligned Buttons with Icons and Dropdown -->
     <div class="right-buttons">
-      <button mat-button routerLink="/market">
-        <mat-icon>shopping_cart</mat-icon> Market
+      <button *ngIf="username" mat-button><mat-icon>person</mat-icon> {{username}}</button>
+      <button mat-button routerLink="market">
+        <mat-icon>store</mat-icon> Market
       </button>
   
       <!-- Dropdown for Login and Register -->
       <button mat-button [matMenuTriggerFor]="userMenu">
-        <mat-icon>account_circle</mat-icon> User
+        <mat-icon>account_circle</mat-icon> Actions
       </button>
       <mat-menu #userMenu="matMenu">
-        <button mat-menu-item routerLink="/login">
-          <mat-icon>login</mat-icon> Login
+        <button *ngIf="isSupplier" mat-menu-item routerLink="addProduct">
+          <mat-icon>library_add</mat-icon> Add Product
         </button>
-        <button mat-menu-item routerLink="/register">
-          <mat-icon>person_add</mat-icon> Register
+        <button mat-menu-item >
+          <mat-icon>edit</mat-icon> Edit Profile
         </button>
+        <button mat-menu-item >
+          <mat-icon>account_balance_wallet</mat-icon> Add Funds
+        </button>
+        <button mat-menu-item >
+          <mat-icon>delete_outline</mat-icon> Delete Account
+        </button>
+        <button mat-menu-item >
+          <mat-icon>shopping_basket</mat-icon> My Orders
+        </button>
+        <button (click)="logout()" mat-menu-item>
+          <mat-icon>exit_to_app</mat-icon> Logout
+        </button>
+
       </mat-menu>
     </div>
   </mat-toolbar>
+  <router-outlet></router-outlet>

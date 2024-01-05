@@ -4,63 +4,76 @@
   <form (ngSubmit)="registerUser()" [formGroup]="registrationForm" class="regform">
 
     <!-- Entity Selection Dropdown using Angular Material -->
-    <mat-form-field appearance="outline">
-      <mat-label>Select Entity Type:</mat-label>
-      <mat-select formControlName="selectedEntity">
-        <mat-option value="user">User</mat-option>
-        <mat-option value="supplier">Supplier</mat-option>
-        <mat-option value="staff">Staff</mat-option>
-      </mat-select>
-      <mat-error *ngIf="registrationForm.get('selectedEntity')!.hasError('required')">Entity Type is required</mat-error>
-    </mat-form-field>
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Select Entity Type:</mat-label>
+        <mat-select formControlName="selectedEntity">
+          <mat-option value="user">User</mat-option>
+          <mat-option value="supplier">Supplier</mat-option>
+          <mat-option value="staff">Staff</mat-option>
+        </mat-select>
+        <mat-error *ngIf="registrationForm.get('selectedEntity')!.hasError('required')">Entity Type is required</mat-error>
+      </mat-form-field>
+  
+      <!-- Common Fields -->
+      <mat-form-field appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="Enter your first name" type="text" formControlName="firstname">
+        <mat-error *ngIf="registrationForm.get('firstname')!.hasError('required')">First Name is required</mat-error>
+      </mat-form-field>
+    </div>
 
-    <!-- Common Fields -->
-    <mat-form-field appearance="outline">
-      <mat-label>First Name</mat-label>
-      <input matInput placeholder="Enter your first name" type="text" formControlName="firstname">
-      <mat-error *ngIf="registrationForm.get('firstname')!.hasError('required')">First Name is required</mat-error>
-    </mat-form-field>
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Enter your last name" type="text" formControlName="lastname">
+        <mat-error *ngIf="registrationForm.get('lastname')!.hasError('required')">Last Name is required</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Phone</mat-label>
+        <input matInput placeholder="Enter your phone" type="text" formControlName="phone">
+        <mat-error *ngIf="registrationForm.get('phone')!.hasError('required')">Phone is required</mat-error>
+      </mat-form-field>
+    </div>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Last Name</mat-label>
-      <input matInput placeholder="Enter your last name" type="text" formControlName="lastname">
-      <mat-error *ngIf="registrationForm.get('lastname')!.hasError('required')">Last Name is required</mat-error>
-    </mat-form-field>
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Address</mat-label>
+        <input matInput placeholder="Enter your address" type="text" formControlName="address">
+        <mat-error *ngIf="registrationForm.get('address')!.hasError('required')">Address is required</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Enter your email" type="email" formControlName="email">
+        <mat-error *ngIf="registrationForm.get('email')!.hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="registrationForm.get('email')!.hasError('email')">Invalid email address</mat-error>
+      </mat-form-field>
+    </div>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Phone</mat-label>
-      <input matInput placeholder="Enter your phone" type="text" formControlName="phone">
-      <mat-error *ngIf="registrationForm.get('phone')!.hasError('required')">Phone is required</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Address</mat-label>
-      <input matInput placeholder="Enter your address" type="text" formControlName="address">
-      <mat-error *ngIf="registrationForm.get('address')!.hasError('required')">Address is required</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Email</mat-label>
-      <input matInput placeholder="Enter your email" type="email" formControlName="email">
-      <mat-error *ngIf="registrationForm.get('email')!.hasError('required')">Email is required</mat-error>
-      <mat-error *ngIf="registrationForm.get('email')!.hasError('email')">Invalid email address</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Password</mat-label>
-      <input matInput placeholder="Enter your password" type="password" formControlName="password">
-      <mat-error *ngIf="registrationForm.get('password')!.hasError('required')">Password is required</mat-error>
-      <mat-error *ngIf="registrationForm.get('password')!.hasError('minlength')">Password must be at least 6 characters</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Confirm Password</mat-label>
-      <input matInput placeholder="Confirm your password" type="password" formControlName="cpassword">
-      
-    <mat-error *ngIf="registrationForm.get('cpassword')!.hasError('required')">Confirmation Password is required</mat-error>
-    <mat-error *ngIf="registrationForm.hasError('passwordMismatch')">Passwords do not match</mat-error>
-    </mat-form-field>
-
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Enter your password" type="password" formControlName="password">
+        <mat-error *ngIf="registrationForm.get('password')!.hasError('required')">Password is required</mat-error>
+        <mat-error *ngIf="registrationForm.get('password')!.hasError('minlength')">Password must be at least 6 characters</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Confirm Password</mat-label>
+        <input matInput placeholder="Confirm your password" type="password" formControlName="cpassword">
+        
+      <mat-error *ngIf="registrationForm.get('cpassword')!.hasError('required')">Confirmation Password is required</mat-error>
+      <mat-error *ngIf="registrationForm.hasError('passwordMismatch')">Passwords do not match</mat-error>
+      </mat-form-field>
+  
+    </div>
     <button mat-raised-button color="primary" type="submit">Register</button>
   </form>
+
+  <p>
+    <small>Already have an Account?</small>
+</p>
+<button  (click)="loginPage()" mat-flat-button><mat-icon>person_add</mat-icon> Login Here</button>
 </div>

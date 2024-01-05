@@ -8,11 +8,16 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
-  { path: 'market', component: MarketComponent },
+  
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
-  { path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
-  { path: 'addProduct', component: AddProductComponent},
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard]},  
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
+    children: [
+      { path: 'market', component: MarketComponent },
+      { path: 'addProduct', component: AddProductComponent},
+
+    ]
+  },
 
 
   // Add more routes as needed

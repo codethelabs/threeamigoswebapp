@@ -111,5 +111,21 @@ router.post('/addUser', async (req, res) => {
     }
   });
 
+  router.get('/getUser/:id', async(req, res)=>{
+    try{
+      const user = await User.findOne({_id: req.params.id});
+      if(user){
+        res.status(200).json({success:true, message: "User exists", data: user})
+      }else{
+        res.status(200).json({success:false, message: "User not found"})
+      }
+
+    }catch(e){
+      res.status(500).json({success:false, message: e})
+
+    }
+    
+  })
+
 module.exports = router;
   

@@ -14,7 +14,13 @@
         <input matInput placeholder="Enter your password" type="password" formControlName="password">
         </mat-form-field>
 
+
         <button mat-raised-button color="primary" type="submit">Login</button>
     </form>
+    
+    <p>
+        <small>No Account?</small>
+    </p>
+    <button  (click)="registrationPage()" mat-flat-button><mat-icon>person_add</mat-icon> Register Here</button>
 </div>
   
