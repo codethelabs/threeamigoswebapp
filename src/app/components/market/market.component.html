@@ -1,1 +1,16 @@
-<p>market works!</p>
+<div class="marketplacepage">
+
+    <mat-card (click)="viewProduct(product._id)" *ngFor="let product of products" class="product" >
+        <img style="height: 150px; width: 110;" src="{{ product.images[0] }}" alt="{{ product.name }}" mat-card-image >        
+        <h4 style="text-align: center;">{{truncateString(product.name, 20)}}</h4>
+        <mat-card-subtitle style="text-align: center;">Price: {{ product.price | currency:'GBP':'symbol':'1.2-2' }}</mat-card-subtitle>        
+        <button (click)="viewProduct(product._id)" mat-stroked-button><mat-icon>add_shopping_cart</mat-icon> Buy</button>       
+    </mat-card>
+
+    
+
+
+
+</div>
+
+

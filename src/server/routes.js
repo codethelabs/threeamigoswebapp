@@ -6,9 +6,10 @@ const bcrypt = require('bcryptjs');
 const path = require('path');
 const multer = require('multer');
 const { BlobServiceClient, StorageSharedKeyCredential } = require("@azure/storage-blob");
+const fs = require('fs');
 
 const azure_storage_account = "3acsimagestorage"
-const azure_storage_account_key = "fDnQnQKkkFFocMOyXGO40ehFSPMiXpc6P2mcMMwbHS8T5anQsyIRCCy2osZ03C03NVwU4Hs3sRZ8+AStFjxPSg==";
+const azure_storage_account_key = "IgeI3y8i8SdWvjW1zUpbkwU3W7tfaTmSSDRfCeji01gmeIm8+Th9jL74RZ4kI/m+wJ0Lh/iFmXJI+ASt1QoVHQ==";
 const azure_storage_account_sharedKeyCredential = new StorageSharedKeyCredential(azure_storage_account, azure_storage_account_key);
 
 const blobServiceClient = new BlobServiceClient(
@@ -85,11 +86,11 @@ router.post('/addProduct', upload.single('productpic'), async (req, res) => {
     const sasToken = await blockBlobClient.generateSasUrl({
       permissions: 'r', // 'READ' permission
       startsOn: new Date(),
-      expiresOn: new Date(new Date().valueOf() + 1314000), // Expires in 24 hours
+      expiresOn: new Date("9999-12-31T23:59:59Z"), // Expires in a very distant future
     });
 
     // Delete the local image file
-    // fs.unlinkSync(imagePath);
+    fs.unlinkSync(imagePath);
 
     const newProduct = new Product({
       name: req.body.productname,
@@ -104,12 +105,47 @@ router.post('/addProduct', upload.single('productpic'), async (req, res) => {
 
     const savedProduct = await newProduct.save();
 
-    res.status(200).json({ success: true, message: "Product added successfully", data: savedProduct });
+    // Include the SAS token as a query parameter in the URL
+    const productWithSas = {
+      ...savedProduct._doc,
+      images: [`${sasToken}`],
+    };
+
+    res.status(200).json({ success: true, message: "Product added successfully", data: productWithSas });
   } catch (error) {
     console.error(error);
     res.status(201).json({ success: false, message: "Server Error" });
   }
 });
+
+
+// get all the products
+router.get('/getAllProducts', async (req, res) => {
+  try {
+    // Get all products
+    const allProducts = await Product.find();
+
+    // Create an array to store unique product identifiers (e.g., name and brand)
+    const uniqueIdentifiers = [];
+
+    // Filter the products to include only the first instance for each unique product
+    const uniqueProducts = allProducts.filter(product => {
+      const identifier = `${product.name}-${product.brand}`;
+      if (!uniqueIdentifiers.includes(identifier)) {
+        uniqueIdentifiers.push(identifier);
+        return true;
+      }
+      return false;
+    });
+
+    res.status(200).json({ success: true, data: uniqueProducts });
+  } catch (e) {
+    res.status(500).json({ success: false, message: e });
+  }
+});
+
+
+
 
 
 
@@ -165,6 +201,54 @@ router.post('/addUser', async (req, res) => {
     }
     
   })
+
+  router.post('/addFunds', async (req, res) => {
+    try {
+      const { userid, amount } = req.body;
+  
+      // Check if the user exists
+      const user = await User.findById(userid);
+  
+      if (!user) {
+        return res.status(404).json({ success: false, message: 'User not found' });
+      }
+  
+      // Check if the user has a balance field
+      if (user.balance) {
+        // If the user has a balance, add the amount to it
+        user.balance += parseFloat(amount);
+      } else {
+        // If the user doesn't have a balance, create a new field
+        user.balance = parseFloat(amount);
+      }
+  
+      // Save the updated user
+      const updatedUser = await user.save();
+  
+      res.status(200).json({ success: true, message: 'Funds added successfully', data: updatedUser });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+  });
+
+  router.get('/getProductDetails/:id', async(req, res)=>{
+    try{
+      const product = await Product.findOne({_id: req.params.id});
+      if(product){
+        res.status(200).json({success:true, message: "Product exists", data: product})
+      }else{
+        res.status(200).json({success:false, message: "Product not found"})
+      }
+
+    }catch(e){
+      res.status(500).json({success:false, message: e})
+
+    }
+    
+  })
+
+
 
 module.exports = router;
   

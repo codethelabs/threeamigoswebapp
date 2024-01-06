@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AddProductComponent } from './components/add-product/add-product.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 const routes: Routes = [
   
@@ -15,6 +16,7 @@ const routes: Routes = [
     children: [
       { path: 'market', component: MarketComponent },
       { path: 'addProduct', component: AddProductComponent},
+      { path: 'view-product/:id', component: ProductDetailsComponent}
 
     ]
   },

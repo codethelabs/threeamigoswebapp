@@ -19,7 +19,7 @@
         <button mat-menu-item >
           <mat-icon>edit</mat-icon> Edit Profile
         </button>
-        <button mat-menu-item >
+        <button (click)="onAddFundsDialog()" mat-menu-item >
           <mat-icon>account_balance_wallet</mat-icon> Add Funds
         </button>
         <button mat-menu-item >
@@ -35,4 +35,9 @@
       </mat-menu>
     </div>
   </mat-toolbar>
+  <div *ngIf="userinfo" class="accountdetails">
+    <span>
+      Balance: {{userinfo.balance | currency:'GBP':'symbol':'1.2-2' }}
+    </span>
+  </div>
   <router-outlet></router-outlet>

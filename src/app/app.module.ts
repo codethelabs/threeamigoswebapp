@@ -18,6 +18,10 @@ import { MatInputModule } from '@angular/material/input';
 import { AddProductComponent } from './components/add-product/add-product.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import {MatCardModule} from '@angular/material/card';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { AddFundsDialogComponent } from './components/add-funds-dialog/add-funds-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -27,7 +31,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     RegisterComponent,
     LoginComponent,
     AddProductComponent,
-    DashboardComponent
+    DashboardComponent,
+    ProductDetailsComponent,
+    AddFundsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +48,10 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     MatSelectModule,
     ReactiveFormsModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule,
+    MatDialogModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,17 @@
+<div *ngIf="productDetails" class="detailspage">
+    <h1>Product Details</h1>
+    <div class="productdetailsrow">
+        <div class="image">
+            <img [src]="productDetails.images[0]" alt="">
+        </div>
+        <div class="features">
+            <h3>{{productDetails.name}}</h3>
+            <li>Price:{{productDetails.price | currency:'GBP':'symbol':'1.2-2'}}</li>
+            <li>Brand:{{productDetails.brand }}</li>
+            <li>Category:{{productDetails.category }}</li>
+            <li>Description:{{productDetails.description }}</li>
+        </div>
+    </div>
+    <button mat-raised-button color="accent"><mat-icon>add_shopping_cart</mat-icon> ADD TO CART</button>
+    
+</div>

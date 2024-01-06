@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MasterService } from 'src/app/services/master.service';
 import { AuthService } from 'src/app/auth.service';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { AddFundsDialogComponent } from '../add-funds-dialog/add-funds-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,13 +15,33 @@ export class DashboardComponent implements OnInit{
   isStaff:boolean = false;
   isSupplier:boolean = false;
   username!: String;
+  userinfo!:any;
 
-  constructor(private ms: MasterService, private auth: AuthService){}
+  constructor(private ms: MasterService, private auth: AuthService, private router: Router, public dialog: MatDialog){}
+
+  onAddFundsDialog(){
+    const dialogRef = this.dialog.open(AddFundsDialogComponent, {
+      width: "20%"
+    })
+    dialogRef.afterClosed().subscribe(funds => {
+      // Handle the result if needed
+      this.ms.addFunds({userid:localStorage.getItem('3ac-uid'), amount: funds}).subscribe((res:any)=>{
+        if(res.success){
+          alert(this.capitalizeEachWord(`Congratulations ${res.data.firstname}, £${funds} added successfully`))
+        }else{
+          alert("Failed to add funds. Please try again")
+        }
+      })
+    });
+  }
 
   ngOnInit(): void {
+    // load the market page
+    this.router.navigate(['dashboard/market'])
     // get the user details
     this.ms.getUserDetails(localStorage.getItem('3ac-uid')).subscribe((res:any)=>{
       if(res.success){
+        this.userinfo = res.data
         this.isSupplier = res.data.supplier;
         this.isStaff = res.data.staff
         this.username = this.capitalizeEachWord(res.data.firstname +' '+res.data.lastname);
