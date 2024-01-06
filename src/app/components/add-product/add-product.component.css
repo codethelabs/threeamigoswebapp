@@ -1,15 +1,56 @@
 .add-product-page{
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: auto;
     width: 100vw;
     display: flex;
     flex-direction: column;
 }
-
+.row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 .add-product-form{
+    padding: 50px;
     height: auto;
-    width: 300px;
+    width: 450px;
     display: flex;
     flex-direction: column;
+}
+
+/* Updated CSS */
+.image-preview {
+    text-align: center;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .delete-icon {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    z-index: 1; /* Set a higher z-index to bring it to the front */
+    background-color: rgba(255, 255, 255, 0.7); /* Optional: Add a background color for better visibility */
+    cursor: pointer;
+    border-radius: 50%;
+  }
+  .success{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(44, 189, 44);
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    margin: 10px;
+}
+
+.error{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(228, 44, 20);
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    margin: 10px;
 }

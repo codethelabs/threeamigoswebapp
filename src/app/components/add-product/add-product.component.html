@@ -1,29 +1,62 @@
 <!-- add-product.component.html -->
 
 <div class="add-product-page">
-    <h1> Add Product</h1>
-    <form [formGroup]="addProductForm" class="add-product-form">
+  <h1> Add Product</h1>
+  <div *ngIf="alert" [class]="alert"><mat-icon>{{alert == "success"? "check_circle":"close_circle"}}</mat-icon> {{feedback}}</div>
+  
+  <form [formGroup]="addProductForm" class="add-product-form" enctype="multipart/form-data">
+    <div class="row">
       <mat-form-field appearance="outline">
         <mat-label>Product Name</mat-label>
         <input matInput placeholder="Enter product name" formControlName="productName">
       </mat-form-field>
   
       <mat-form-field appearance="outline">
-        <mat-label>Description</mat-label>
-        <textarea matInput placeholder="Enter product description" formControlName="description"></textarea>
+        <mat-label>Brand</mat-label>
+        <input matInput placeholder="Enter product brand" formControlName="brand">
       </mat-form-field>
-  
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Category</mat-label>
+        <input matInput placeholder="Enter product category" formControlName="category">
+      </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Price</mat-label>
         <input matInput placeholder="Enter product price" type="number" formControlName="price">
       </mat-form-field>
   
-      <mat-form-field appearance="outline">
-        <mat-label>Stock Quantity</mat-label>
-        <input matInput placeholder="Enter stock quantity" type="number" formControlName="stockQuantity">
-      </mat-form-field>
-  
-      <button mat-raised-button color="primary" type="submit">Add Product</button>
-    </form>
-  </div>
-  
+    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Stock Quantity</mat-label>
+      <input matInput placeholder="Enter stock quantity" type="number" formControlName="stockQuantity">
+    </mat-form-field>
+
+
+
+
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput placeholder="Enter product description" formControlName="description"></textarea>
+    </mat-form-field>
+
+    
+    <!-- Hidden file input -->
+
+    <!-- Upload button with click event -->
+    <button style="margin-bottom: 10px;" mat-stroked-button color="primary" (click)="uploadButtonClick()">
+      <mat-icon style="vertical-align: middle;">camera_alt</mat-icon> Upload
+    </button>
+    <input type="file" name="productpic" id="productpic" #productpic (change)="onFileSelected($event)" hidden>
+
+    <!-- Image preview and delete icon -->
+    <div *ngIf="imagePreview" class="image-preview">
+      <img [src]="imagePreview" alt="Product Image">
+      <mat-icon class="delete-icon" (click)="clearFile()">close</mat-icon>
+    </div>
+
+
+    <!-- Submit button -->
+    <button (click)="addProduct()" mat-raised-button color="primary" type="submit">Add Product</button>
+  </form>
+</div>

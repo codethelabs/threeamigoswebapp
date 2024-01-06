@@ -6,8 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class MasterService {
   constructor(private http: HttpClient){}
-
-  baseurl = "https://3acs-server.azurewebsites.net/api";
+  // https://3acs-server.azurewebsites.net/
+  baseurl = "http://localhost:3000/api";
 
   registerUser(data:any){
     return this.http.post(this.baseurl+'/addUser', data);
@@ -15,6 +15,10 @@ export class MasterService {
 
   loginUser(data:any){
     return this.http.post(this.baseurl+'/login', data);
+  }
+
+  addProduct(data:FormData){
+    return this.http.post(this.baseurl+'/addProduct', data);
   }
 
   getUserDetails(userid:any){
