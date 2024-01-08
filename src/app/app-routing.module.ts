@@ -7,6 +7,9 @@ import { AddProductComponent } from './components/add-product/add-product.compon
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { OrdersComponent } from './components/orders/orders.component';
+import { ManagementComponent } from './components/management/management.component';
 
 const routes: Routes = [
   
@@ -16,7 +19,10 @@ const routes: Routes = [
     children: [
       { path: 'market', component: MarketComponent },
       { path: 'addProduct', component: AddProductComponent},
-      { path: 'view-product/:id', component: ProductDetailsComponent}
+      { path: 'profile', component: ProfileComponent},
+      { path: 'view-product/:id', component: ProductDetailsComponent},
+      { path: 'orders', component: OrdersComponent},
+      { path: 'management', component: ManagementComponent},
 
     ]
   },

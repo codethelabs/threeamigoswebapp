@@ -1,0 +1,85 @@
+
+<div class="profilepage">
+    <div  class="updatedetails">
+        <mat-spinner diameter="30" *ngIf="!userinfo" strokeWidth="2"></mat-spinner>
+        <mat-card style="align-items: center; display: flex; flex-direction: column; justify-content: center;">
+            <mat-card-title ><mat-icon color="accent">edit</mat-icon>Edit Profile</mat-card-title>
+            <mat-card-content >
+                <p [class]="alert" style="text-align: center; width: 100%;">{{feedback}}</p>
+                <form [formGroup]="update" *ngIf="userinfo" style="display: flex; flex-direction: column; width: auto;">
+                    <!-- <h3><mat-icon color="accent" style="vertical-align: middle;"></h3> -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>First Name</mat-label>
+                        <input type="text" matInput placeholder="Current:{{userinfo.firstname}}" formControlName="firstname">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Last Name</mat-label>
+                        <input type="text" matInput placeholder="Current:{{userinfo.lastname}}" formControlName="lastname">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Address</mat-label>
+                        <input type="text" matInput placeholder="Current:{{userinfo.address}}" formControlName="address">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Phone</mat-label>
+                        <input type="text" matInput placeholder="Current:{{userinfo.phone}}" formControlName="phone">
+                    </mat-form-field>
+                    <button (click)="updateUserDetails(userinfo._id)" mat-stroked-button> Update</button>
+        
+                </form>
+            </mat-card-content>
+        </mat-card>        
+    </div>
+    <div class="transactionhistory">
+        <h2>Transactions History</h2>
+        <span *ngIf="!transactions"><mat-icon color="accent" style="vertical-align: middle;">error</mat-icon> No Transactions Found</span>
+        <table  [cellSpacing]="15">
+            <tr >
+                <th>
+                    #
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Amount
+                </th>
+                <th>
+                    Description
+                </th>
+            </tr>
+            <tr *ngFor="let transaction of transactions; let i = index">
+                <td>
+                    {{i+1}}
+                </td>
+                <td>
+                    {{ formatDate(transaction.date)}}
+                </td>
+                <td>
+                    {{transaction.amount | currency: "GBP"}}
+                </td>
+                <td>
+                    {{transaction.description}}
+                </td>
+            </tr>
+
+
+        </table>
+        <!-- order and transaction history -->
+    </div>
+    <div *ngIf="cartitems" class="cartdiv">
+        <h2>Active Cart Items</h2>        
+        <div *ngFor="let item of cartitems " class="cartitem">
+            <img style="height: 50px; width: 50px;" [src]="item.image" alt="">
+            <p><strong>Item:</strong> {{item.name}} |</p>
+            <p><strong>Qty:</strong> {{item.quantity}} |</p>
+            <p><strong>Total:</strong> {{item.price}}</p>
+        </div>
+        <mat-card>
+            <mat-card-title style="padding: 10px;">
+                Total: {{totalAmount | currency: "GBP"}}
+            </mat-card-title>
+        </mat-card>
+        <button (click)="checkout()" mat-raised-button color="primary">CHECKOUT</button>
+    </div>
+</div>

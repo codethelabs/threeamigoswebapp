@@ -1,0 +1,53 @@
+<div class="orderspage">
+    <div class="userorders">
+        <div class="ordershistory">
+            <strong>Orders History</strong>
+            <table>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Order ID
+                    </th>
+                    <th>
+                        Number of Items
+                    </th>
+                    <th>
+                        Total Amount
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Order Status
+                    </th>
+                </tr>
+                <tr *ngFor="let order of orders; let i = index">
+                    <td>
+                        {{i+1}}
+                    </td>
+                    <td>
+                        {{ order._id }}
+                    </td>
+                    <td>
+                        {{ order.products.length }}
+                    </td>
+                    <td>
+                        {{ order.totalAmount | currency: "GBP" }}
+                    </td>
+                    <td>
+                        {{ order.date | date:'MMM d, y, h:mm:ss a'}}
+                    </td>
+                    <td>
+                        {{ order.status }}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="stafforders">
+        <!-- staff orders -->
+    </div>
+    
+</div>

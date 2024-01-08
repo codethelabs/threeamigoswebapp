@@ -4,7 +4,7 @@
     <!-- Right-aligned Buttons with Icons and Dropdown -->
     <div class="right-buttons">
       <button *ngIf="username" mat-button><mat-icon>person</mat-icon> {{username}}</button>
-      <button mat-button routerLink="market">
+      <button *ngIf="!isStaff" mat-button routerLink="market">
         <mat-icon>store</mat-icon> Market
       </button>
   
@@ -16,16 +16,19 @@
         <button *ngIf="isSupplier" mat-menu-item routerLink="addProduct">
           <mat-icon>library_add</mat-icon> Add Product
         </button>
-        <button mat-menu-item >
-          <mat-icon>edit</mat-icon> Edit Profile
+        <button *ngIf="!isStaff" routerLink="profile" mat-menu-item >
+          <mat-icon>person</mat-icon> View Profile
         </button>
-        <button (click)="onAddFundsDialog()" mat-menu-item >
+        <button *ngIf="!isStaff" (click)="onAddFundsDialog()" mat-menu-item >
           <mat-icon>account_balance_wallet</mat-icon> Add Funds
         </button>
-        <button mat-menu-item >
+        <button *ngIf="isStaff" mat-menu-item >
+          <mat-icon>settings</mat-icon> User Management
+        </button>
+        <button (click)="deleteUserAccount(userinfo._id)" mat-menu-item >
           <mat-icon>delete_outline</mat-icon> Delete Account
         </button>
-        <button mat-menu-item >
+        <button *ngIf="!isStaff" routerLink="orders" mat-menu-item >
           <mat-icon>shopping_basket</mat-icon> My Orders
         </button>
         <button (click)="logout()" mat-menu-item>
@@ -35,9 +38,12 @@
       </mat-menu>
     </div>
   </mat-toolbar>
-  <div *ngIf="userinfo" class="accountdetails">
+  <div *ngIf="userinfo && !isStaff" class="accountdetails">
     <span>
       Balance: {{userinfo.balance | currency:'GBP':'symbol':'1.2-2' }}
     </span>
   </div>
-  <router-outlet></router-outlet>
+  <div *ngIf="!userinfo" class="progress">
+    <mat-spinner strokeWidth="2"></mat-spinner>
+  </div>
+  <router-outlet *ngIf="userinfo"></router-outlet>

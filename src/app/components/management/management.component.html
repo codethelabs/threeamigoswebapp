@@ -1,0 +1,47 @@
+<div class="managementpage">
+    <div class="userslist">
+        
+    </div>
+    <div *ngIf="!ordersList" class="orderslist">
+        <mat-spinner strokeWidth="1" diameter="50"></mat-spinner>
+    </div>
+    <div *ngIf="ordersList" class="orderslist">
+        <h3><mat-icon>list</mat-icon> Orders Management</h3>
+        <mat-accordion style="margin: 1px" *ngFor="let cartItem of ordersList | keyvalue">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{ cartItem.key }}
+                </mat-panel-title>
+                <mat-panel-description>
+                    <div style="display: flex; width: 100%; flex-direction: row; justify-content: space-between; align-items: center;">
+                        {{ cartItem.value['status'] }}
+                        <div>
+                            <button *ngIf="cartItem.value['status']=='Processing'" (click)="markOrderDispatched(cartItem.key)" mat-stroked-button>Mark Dispatched</button>
+                            <button *ngIf="cartItem.value['status']=='Dispatched'" (click)="markComplete(cartItem.key)" mat-stroked-button>Mark Completed</button>
+                            <mat-icon style="color: rgb(10, 225, 86);" *ngIf="cartItem.value['status']=='Completed'">check_circle</mat-icon>
+                         </div>
+                        
+                    </div>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <table>
+                <tr><th>#</th><th>Image</th><th>Name</th><th>Qtt</th><th>Price</th><th>Desc.</th></tr>
+                <tr *ngFor="let item of cartItem.value['products']; let i=index">
+                    <td>{{i+1}}</td><td><img style="height: 50px; width: 50px;" [src]="item.image" alt=""></td>
+                    <td>{{item.productName}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.productDescription}}</td>
+                </tr>
+
+              </table>
+              
+              
+            </mat-expansion-panel>
+          </mat-accordion>
+
+
+      
+
+</div>

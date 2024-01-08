@@ -50,6 +50,7 @@ export class DashboardComponent implements OnInit{
           this.userType = "Supplier Dashboard"
         }
         if(res.data.staff){
+          this.router.navigate(['dashboard/management'])
           this.userType = "Staff Dashboard"
         }
 
@@ -73,6 +74,23 @@ export class DashboardComponent implements OnInit{
   // logout
   logout(){
     this.auth.logout();
+  }
+  // delete user account
+  deleteUserAccount(id:any){
+    let confirmation = confirm("Are you sure you want to delete your account?")
+    if(confirmation){
+      this.ms.deleteUserAccount(id).subscribe((res:any)=>{
+        if(res.success){
+          this.logout()
+        }else{
+          alert(res.message)
+        }
+      })
+    }else{
+      alert("Operation canceled")
+    }
+
+    
   }
 
 

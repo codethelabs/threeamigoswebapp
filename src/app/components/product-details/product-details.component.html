@@ -10,8 +10,22 @@
             <li>Brand:{{productDetails.brand }}</li>
             <li>Category:{{productDetails.category }}</li>
             <li>Description:{{productDetails.description }}</li>
+            <li>Status:Available</li>
+            <li>Available Qtty:{{productDetails.stockQuantity}}</li>
+
+
+
         </div>
     </div>
-    <button mat-raised-button color="accent"><mat-icon>add_shopping_cart</mat-icon> ADD TO CART</button>
+    <span *ngIf="userType=='Staff' || userType=='Supplier'" style="margin: 5px;">Remaining Qtty: {{productDetails.stockQuantity}}</span>
+    <div class="buttonsRow">
+        <button (click)="addToCart(productDetails._id, productDetails.stockQuantity)" *ngIf="userType!='Staff' && userType!='Supplier'" mat-raised-button color="accent" style="margin: 5px;"><mat-icon>add_shopping_cart</mat-icon> Add to Cart</button>
+        <button (click)="rejectProduct(productDetails._id)" *ngIf="userType!='Supplier' && userType!='User'" mat-raised-button color="primary" style="margin: 5px;"><mat-icon>delete</mat-icon> Reject</button>
+
+
+    </div>
     
 </div>
+<div *ngIf="!productDetails" class="progress">
+    <mat-spinner strokeWidth="2"></mat-spinner>
+  </div>

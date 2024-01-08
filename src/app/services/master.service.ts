@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class MasterService {
   constructor(private http: HttpClient){}
   // https://3acs-server.azurewebsites.net/
-  baseurl = "https://3acs-server.azurewebsites.net/api";
+  baseurl = "http://localhost:3000/api";
 
   registerUser(data:any){
     return this.http.post(this.baseurl+'/addUser', data);
@@ -17,8 +17,22 @@ export class MasterService {
     return this.http.post(this.baseurl+'/login', data);
   }
 
+  getAllOrders(){
+    return this.http.get(`${this.baseurl}/getCartItems`)
+  }
+
+  markOrderDispatched(id:any){
+    return this.http.get(`${this.baseurl}/markOrderDispatched/${id}`)
+  }
+  markOrderCompleted(id:any){
+    return this.http.get(`${this.baseurl}/markOrderCompleted/${id}`)
+  }
+
   addProduct(data:FormData){
     return this.http.post(this.baseurl+'/addProduct', data);
+  }
+  updateUserDetails(data:any){
+    return this.http.put(this.baseurl+'/updateUser', data);
   }
 
   addFunds(data:any){
@@ -28,11 +42,52 @@ export class MasterService {
   getUserDetails(userid:any){
     return this.http.get(this.baseurl+'/getUser/'+userid);
   }
+  getUserTransactions(userid:any){
+    return this.http.get(this.baseurl+'/getUserTransactions/'+userid);
+  }
   listAllProducts(){
     return this.http.get(this.baseurl+'/getAllProducts');
   }
   getProductDetails(id:any){
     return this.http.get(this.baseurl+'/getProductDetails/'+id);
+  }
+  rejectProduct(data:any){
+    return this.http.post(`${this.baseurl}/rejectProduct`, data)
+  }
+  deleteUserAccount(id:any){
+    return this.http.get(`${this.baseurl}/deleteUserAccount/${id}`)
+  }
+  getUserCartItems(id:any){
+    return this.http.get(`${this.baseurl}/getUserCartItems/${id}`)
+  }
+
+  addProductToCart(data:any){
+    return this.http.post(`${this.baseurl}/addToCart`, data)
+  }
+  checkout(id:any){
+    return this.http.get(`${this.baseurl}/checkout/${id}`)
+  }
+  getUserOrders(userid:any){
+    return this.http.get(`${this.baseurl}/getUserOrders/${userid}`)
+  }
+
+  // general purpose logic
+  formatOrdinalDate(inputDate: string): string {
+    const date = new Date(inputDate);
+  
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'short' });
+    const year = date.getFullYear();
+  
+    const suffix = this.getOrdinalSuffix(day);
+  
+    return `${day}${suffix} ${month} ${year}`;
+  }
+  
+  getOrdinalSuffix(n: number): string {
+    const suffixes = ['th', 'st', 'nd', 'rd'];
+    const v = n % 100;
+    return (suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0]);
   }
 
 }

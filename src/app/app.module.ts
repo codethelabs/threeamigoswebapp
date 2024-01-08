@@ -22,6 +22,11 @@ import {MatCardModule} from '@angular/material/card';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { AddFundsDialogComponent } from './components/add-funds-dialog/add-funds-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ProfileComponent } from './components/profile/profile.component';
+import { OrdersComponent } from './components/orders/orders.component';
+import { ManagementComponent } from './components/management/management.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 @NgModule({
@@ -33,7 +38,10 @@ import {MatDialogModule} from '@angular/material/dialog';
     AddProductComponent,
     DashboardComponent,
     ProductDetailsComponent,
-    AddFundsDialogComponent
+    AddFundsDialogComponent,
+    ProfileComponent,
+    OrdersComponent,
+    ManagementComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +58,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatInputModule,
     HttpClientModule,
     MatCardModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatExpansionModule
     
   ],
   providers: [],

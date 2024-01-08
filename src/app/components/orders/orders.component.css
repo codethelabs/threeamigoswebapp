@@ -1,0 +1,37 @@
+.orderspage{
+    height: auto;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.userorders{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.ordershistory{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+table, table td{
+    justify-content: center;
+    text-align: center;
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+    color: rgb(11, 15, 126);
+}
+
+table th{
+    color: rgb(226, 38, 213);
+    border: 1px solid black;
+    border-collapse: collapse;
+}
