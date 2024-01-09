@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MasterService } from 'src/app/services/master.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { MasterService } from 'src/app/services/master.service';
 export class OrdersComponent implements OnInit {
   orders!:any;
   // constructor
-  constructor(private ms: MasterService){}
+  constructor(private ms: MasterService, private router: Router){}
   // ngoninit
   ngOnInit(): void {
     // list all the orders - processing, dispatched, 
@@ -18,6 +19,10 @@ export class OrdersComponent implements OnInit {
         this.orders = res.data
       }
     })
+  }
+
+  viewProduct(id:any){
+    this.router.navigate(['dashboard/view-product', id])
   }
 
 }

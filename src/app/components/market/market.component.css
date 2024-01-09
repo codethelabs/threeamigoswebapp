@@ -10,6 +10,17 @@
     /* justify-content: center; */
     /* Additional styling as needed */
   }
+  .searchmarketplacepage {
+    height: auto;
+    width: 100vw;
+    display: block;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-left: 5%;
+    justify-content: center;
+    /* Additional styling as needed */
+  }
   
   .product {
     /* Styling for each individual product */
@@ -21,4 +32,10 @@
     border-radius: 5px;
     /* Additional styling as needed */
   }
-  
+  .searchdiv{
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }

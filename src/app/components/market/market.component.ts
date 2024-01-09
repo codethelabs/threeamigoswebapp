@@ -8,8 +8,11 @@ import { MasterService } from 'src/app/services/master.service';
   styleUrls: ['./market.component.css']
 })
 export class MarketComponent implements OnInit {
-  products!:any[];
-  status: String = ""
+  products!: any[];
+  filteredProducts: any[] = [];
+  status: string = "";
+  searchTerm: string = "";
+  
 
   // constructor
   constructor(private ms: MasterService, private router: Router){}
@@ -23,6 +26,8 @@ export class MarketComponent implements OnInit {
         this.status = "No Product found!"
       }
     })
+
+    
     
   }
 
@@ -36,6 +41,28 @@ export class MarketComponent implements OnInit {
 
   viewProduct(id:any){
     this.router.navigate(['dashboard/view-product', id])
+  }
+
+  searchProducts() {
+    const lowerCaseSearchTerm = this.searchTerm.toLowerCase();
+    if(lowerCaseSearchTerm!=""){
+      this.filteredProducts = this.products.filter((product) => {
+        const { name, description, price, category, brand } = product;
+  
+        return (
+          name.toLowerCase().includes(lowerCaseSearchTerm) ||
+          description.toLowerCase().includes(lowerCaseSearchTerm) ||
+          price.toString().includes(lowerCaseSearchTerm) ||
+          category.toLowerCase().includes(lowerCaseSearchTerm) ||
+          brand.toLowerCase().includes(lowerCaseSearchTerm)
+        );
+      });
+
+    }else{
+      this.filteredProducts = [];
+    }
+
+    
   }
 
 

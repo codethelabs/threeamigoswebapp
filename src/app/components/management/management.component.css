@@ -5,15 +5,24 @@
     height: auto;
     width: 100vw;
     justify-content: center;
-    align-items: center;
+}
+
+table td, table th{
+    border-collapse: collapse;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+    
+}
+table{
+    margin: 10px;
 }
 
 .orderslist{
-    width: 40vw;
+    width: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    
 }
 .orderslist h3{
     width: 100%;
@@ -22,3 +31,12 @@
     flex-direction: row;
     justify-content: center;
 }
+
+.well {
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    background-color: #1bedca;
+    display: flex;
+    flex-direction: row;
+  }

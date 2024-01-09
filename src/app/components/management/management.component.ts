@@ -23,6 +23,11 @@ export class ManagementComponent implements OnInit{
         console.error('Error fetching grouped cart items:', error);
       }
     );
+    this.ms.getAllUsers().subscribe((res:any)=>{
+      if(res.success){
+        this.usersList = res.data
+      }
+    })
       
   }
 

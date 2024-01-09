@@ -1,6 +1,17 @@
 <div class="managementpage">
-    <div class="userslist">
-        
+    <div *ngIf="usersList" class="userslist">
+        <div class="headerdiv" style="display: flex; flex-direction: row; justify-content: center;">
+          <h2><mat-icon>people</mat-icon> Users</h2>
+        </div>
+        <table  [cellPadding]="5">
+          <tr>
+            <th>#</th><th>Name</th><th>Phone</th><th>Email</th><th>Addr.</th><th>Type</th>
+          </tr>
+          <tr *ngFor="let user of usersList; let i = index;">
+            <td>{{i+1}}</td><td>{{user.firstname}} {{user.lastname}}</td><td>{{user.phone}}</td><td>{{user.email}}</td><td>{{user.address}}</td><td>{{user.staff?"Staff":(user.supplier?"Supplier":"User")}}</td>
+          </tr>
+
+        </table>
     </div>
     <div *ngIf="!ordersList" class="orderslist">
         <mat-spinner strokeWidth="1" diameter="50"></mat-spinner>
@@ -15,24 +26,28 @@
                 </mat-panel-title>
                 <mat-panel-description>
                     <div style="display: flex; width: 100%; flex-direction: row; justify-content: space-between; align-items: center;">
-                        {{ cartItem.value['status'] }}
+                      {{ cartItem.value['status'] }}
                         <div>
-                            <button *ngIf="cartItem.value['status']=='Processing'" (click)="markOrderDispatched(cartItem.key)" mat-stroked-button>Mark Dispatched</button>
-                            <button *ngIf="cartItem.value['status']=='Dispatched'" (click)="markComplete(cartItem.key)" mat-stroked-button>Mark Completed</button>
+                          <button *ngIf="cartItem.value['status']=='Processing'" (click)="markOrderDispatched(cartItem.key)" mat-icon-button><mat-icon color="primary">directions_car</mat-icon></button>
+                          <button *ngIf="cartItem.value['status']=='Dispatched'" (click)="markComplete(cartItem.key)" mat-icon-button><mat-icon color="accent">check_box</mat-icon></button>
                             <mat-icon style="color: rgb(10, 225, 86);" *ngIf="cartItem.value['status']=='Completed'">check_circle</mat-icon>
                          </div>
                         
                     </div>
                 </mat-panel-description>
               </mat-expansion-panel-header>
-              <table>
-                <tr><th>#</th><th>Image</th><th>Name</th><th>Qtt</th><th>Price</th><th>Desc.</th></tr>
+              
+              <p class="well">
+                {{ cartItem.value['status'] }}
+                {{ cartItem.value['date'] | date: 'MMM d, h:mm:ss a'}}
+              </p>
+              <table  [cellPadding]="5">
+                <tr><th>#</th><th>Image</th><th>Name</th><th>Qtt</th><th>Price</th></tr>
                 <tr *ngFor="let item of cartItem.value['products']; let i=index">
                     <td>{{i+1}}</td><td><img style="height: 50px; width: 50px;" [src]="item.image" alt=""></td>
                     <td>{{item.productName}}</td>
                     <td>{{item.quantity}}</td>
-                    <td>{{item.price}}</td>
-                    <td>{{item.productDescription}}</td>
+                    <td>{{item.price | currency: "GBP"}}</td>
                 </tr>
 
               </table>
